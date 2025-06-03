@@ -1,0 +1,12 @@
+PyQt5
+matplotlib
+colour
+colour-science
+scikit-learn
+pathos
+geomdl
+rawpy
+imageio
+scikit-image
+numba
+torch
