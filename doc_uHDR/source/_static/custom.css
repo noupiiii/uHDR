@@ -1,0 +1,125 @@
+/* CSS personnalisé pour uHDRv6 Documentation */
+
+/* Couleurs principales */
+:root {
+    --primary-color: #2980B9;
+    --secondary-color: #3498DB;
+    --accent-color: #E74C3C;
+    --dark-bg: #2C3E50;
+    --light-gray: #ECF0F1;
+}
+
+/* Amélioration des titres */
+.rst-content h1, .rst-content h2, .rst-content h3 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.3em;
+}
+
+/* Style pour les avertissements et notes */
+.rst-content .note {
+    background: #E8F4FD;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.rst-content .warning {
+    background: #FDF2E8;
+    border-left: 4px solid #F39C12;
+}
+
+.rst-content .danger {
+    background: #FDEBEA;
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Amélioration des blocs de code */
+.rst-content pre {
+    background: #2D3748;
+    color: #E2E8F0;
+    border: 1px solid #4A5568;
+    border-radius: 6px;
+}
+
+/* Style pour les liens */
+.rst-content a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.rst-content a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Amélioration de la sidebar */
+.wy-nav-side {
+    background: var(--dark-bg);
+}
+
+.wy-menu-vertical a {
+    color: #BDC3C7;
+}
+
+.wy-menu-vertical a:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Style pour les tableaux */
+.rst-content table.docutils {
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.rst-content table.docutils th {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5em;
+}
+
+.rst-content table.docutils td {
+    padding: 0.5em;
+    border: 1px solid #ddd;
+}
+
+/* Responsive design amélioré */
+@media screen and (max-width: 768px) {
+    .wy-nav-content {
+        margin-left: 0;
+    }
+}
+
+/* Animation pour les boutons */
+.btn, .wy-btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover, .wy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Style pour la breadcrumb */
+.wy-breadcrumbs {
+    margin-bottom: 1.2em;
+    padding-bottom: 0.8em;
+    border-bottom: 1px solid #e1e4e5;
+}
+
+/* Amélioration de la recherche */
+.wy-side-nav-search {
+    background: var(--primary-color);
+}
+
+.wy-side-nav-search input[type=text] {
+    border-radius: 20px;
+    border: none;
+    padding: 6px 12px;
+}
+
+/* Footer personnalisé */
+.rst-footer-buttons {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #e1e4e5;
+}
