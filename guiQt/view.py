@@ -233,9 +233,10 @@ class ImageGalleryView(QSplitter):
 
     def updateImage(self, idx, processPipe, filename):
         if pref.verbose: print(" [VIEW] >> ImageGalleryView.updateImage(",")")
-        imageWidgetController = self.imagesControllers[idx]                                 
-        imageWidgetController.setImage(processPipe.getImage())
-        self.controller.parent.statusBar().showMessage("loading of image "+filename+" done!")
+        if (len(self.imagesControllers) <= idx):
+            imageWidgetController = self.imagesControllers[idx]                                 
+            imageWidgetController.setImage(processPipe.getImage())
+            self.controller.parent.statusBar().showMessage("loading of image "+filename+" done!")
 
     def resetGridLayoutWidgets(self):
         if pref.verbose: print(" [VIEW] >> ImageGalleryView.resetGridLayoutWidgets(",")")
