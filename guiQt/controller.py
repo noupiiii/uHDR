@@ -1033,23 +1033,26 @@ class HDRviewerController():
             # re-run display HDR process
             self.viewerProcess = subprocess.Popen(["HDRImageViewer.exe","-f", "-input:"+HDRfilename, "-f", "-h"], shell=True)
 
-    def displayIMG(self, img):
-        img = img.process(hdrCore.processing.clip())
-        colorData = img.colorData*self.model.displayModel['scaling']
+    def displayIMG(self, img, mode='none'):
+        model = self.model.displayModel.get(mode)
+        
+        if (model != None):
+            img = img.process(hdrCore.processing.clip())
+            colorData = img.colorData * model['scaling']
 
-        h,w, _ = colorData.shape
-        hD, wD = self.model.displayModel['shape']
+            h, w, _ = colorData.shape
+            hD, wD = model['shape']
 
-        if w<wD:
-            back = np.ones((hD,wD,3))*0.2
-            marginW = int((wD-w)/2)
-            marginH = int((hD-h)/2)
+            if w < wD:
+                back = np.ones((hD, wD, 3)) * 0.2
+                marginW = int((wD - w) / 2)
+                marginH = int((hD - h) / 2)
 
-            back[marginH:marginH+h,marginW:marginW+w,:]=colorData
+                back[marginH:marginH + h, marginW:marginW + w, :] = colorData
 
-        # save as temp.hdr
-        colour.write_image(back,'temp.hdr', method='Imageio')
-        self.displayFile('temp.hdr')
+            # save as temp.hdr
+            colour.write_image(back,'temp.hdr', method='Imageio')
+            self.displayFile('temp.hdr')
 
     def displaySplash(self):
         self.model.currentIMG = None
