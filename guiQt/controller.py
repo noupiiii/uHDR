@@ -477,25 +477,26 @@ class AppController(object):
         self.view.statusBar().repaint()
         self.imageToExport = len(self.processPipes) ; self.imageExportDone = 0
 
-        pp = self.processPipes[0]
+        if (len(self.processPipes) > 0):
+            pp = self.processPipes[0]
 
-        # save current processpipe metada
-        originalImage = copy.deepcopy(pp.originalImage)
-        originalImage.metadata.metadata['processpipe'] = pp.toDict()
-        originalImage.metadata.save()
+            # save current processpipe metada
+            originalImage = copy.deepcopy(pp.originalImage)
+            originalImage.metadata.metadata['processpipe'] = pp.toDict()
+            originalImage.metadata.save()
 
-        # load full size image
-        img = hdrCore.image.Image.read(originalImage.path+'/'+originalImage.name)
+            # load full size image
+            img = hdrCore.image.Image.read(originalImage.path+'/'+originalImage.name)
 
-        # turn off: autoResize
-        hdrCore.processing.ProcessPipe.autoResize = False 
-        # make a copy of selectedProcessPipe  
-        processpipe = copy.deepcopy(pp)
+            # turn off: autoResize
+            hdrCore.processing.ProcessPipe.autoResize = False 
+            # make a copy of selectedProcessPipe  
+            processpipe = copy.deepcopy(pp)
 
-        # set image to process-pipe
-        processpipe.setImage(img)
+            # set image to process-pipe
+            processpipe.setImage(img)
 
-        thread.cCompute(self.callBackEndAllExportHDR, processpipe, toneMap=False, progress=self.view.statusBar().showMessage)            
+            thread.cCompute(self.callBackEndAllExportHDR, processpipe, toneMap=False, progress=self.view.statusBar().showMessage)            
     # -----------------------------------------------------------------------------
     def callBackEndAllExportHDR(self, img):
         # last image ?
