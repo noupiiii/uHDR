@@ -463,8 +463,8 @@ class AppController(object):
 
             img.write(pathExport)
 
-        colour.write_image(img.colorData,"temp.hdr", method='Imageio') # local copy for display
-        self.hdrDisplay.displayFile("temp.hdr")
+            colour.write_image(img.colorData,"temp.hdr", method='Imageio') # local copy for display
+            self.hdrDisplay.displayFile("temp.hdr")
     # -----------------------------------------------------------------------------
     def callBackExportAllHDR(self):
         if pref.verbose:  print(" [CONTROL] >> AppController.callBackExportAllHDR()")
@@ -987,26 +987,34 @@ class HDRviewerController():
             old = old.process(hdrCore.processing.clip())
 
             sp = self.parent.view.imageGalleryController.model.getSelectedProcessPipe()
-            img = sp.getImage(toneMap = False)
+            img = sp.getImage(toneMap=False)
             img = img.process(hdrCore.processing.clip())
 
+            # Choix du mode d'affichage actuel
+            mode = self.model.displayMode  # <== Assure-toi que cet attribut existe
+            model = self.model.displayModel.get(mode)
+            if not model:
+                raise ValueError(f"Display mode '{mode}' not found in displayModel.")
 
             h1, w1, _ = old.colorData.shape
             h2, w2, _ = img.colorData.shape
-            hD, wD = self.model.displayModel['shape']
-            hM = int((hD - max(h1,h2))/2)
-            wM = int((wD - (w1+w2))/3)
-            back =  np.ones((hD,wD,3))*0.2
+            hD, wD = model['shape']
 
-            back[hM:hM+h1,wM:wM+w1,:] = old.colorData*self.model.displayModel['scaling']
-            back[hM:hM+h2,2*wM+w1:2*wM+w1+w2,:] = img.colorData*self.model.displayModel['scaling']
+            hM = int((hD - max(h1, h2)) / 2)
+            wM = int((wD - (w1 + w2)) / 3)
+            back = np.ones((hD, wD, 3)) * 0.2
 
-            # save as temp.hdr
-            colour.write_image(back,'temp.hdr', method='Imageio')
+            back[hM:hM + h1, wM:wM + w1, :] = old.colorData * model['scaling']
+            back[hM:hM + h2, 2 * wM + w1:2 * wM + w1 + w2, :] = img.colorData * model['scaling']
+
+            # Save as temp.hdr
+            colour.write_image(back, 'temp.hdr', method='Imageio')
             self.displayFile('temp.hdr')
 
             self.model.currentIMG = img
-        else: self.callBackUpdate()
+        else:
+            self.callBackUpdate()
+
 
     def displayFile(self, HDRfilename):
         """
