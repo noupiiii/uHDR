@@ -973,9 +973,10 @@ class HDRviewerController():
 
     def callBackUpdate(self):
         selectedProcessPipe = self.parent.view.imageGalleryController.model.getSelectedProcessPipe()
-        img = selectedProcessPipe.getImage(toneMap = False)
-        self.displayIMG(img)
-        self.model.currentIMG = img
+        if (selectedProcessPipe != None):
+            img = selectedProcessPipe.getImage(toneMap = False)
+            self.displayIMG(img)
+            self.model.currentIMG = img
 
     def callBackAuto(self,on_off):
         self.parent.view.dock.view.childControllers[0].model.autoPreviewHDR = on_off
