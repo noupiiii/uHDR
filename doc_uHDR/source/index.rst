@@ -19,7 +19,6 @@ des images avec un contraste, une luminosité et une richesse de couleurs bien s
    presentation
    installation
    usage
-   fonctionnalites
 
 .. toctree::
    :maxdepth: 2

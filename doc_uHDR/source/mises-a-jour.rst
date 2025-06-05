@@ -1,4 +1,4 @@
-=================================
+================================= 
 Mises à jour et Migration Python
 =================================
 
@@ -33,192 +33,66 @@ Checklist de migration
 ======================
 
 Environnement et dépendances
------------------------------
+----------------------------
 
-.. todo::
-   **Environnement Python**
-   
-   - [ ] Installation de Python 3.12
-   - [ ] Création d'un nouvel environnement virtuel
-   - [ ] Mise à jour de pip vers la dernière version
-   - [ ] Test de compatibilité des scripts existants
+**Environnement Python**
 
-.. todo::
-   **Dépendances principales**
-   
-   - [ ] **NumPy** : Vérification compatibilité version ≥ 1.21.0
-   - [ ] **PyQt5** : Test de compatibilité ou migration vers PyQt6
-   - [ ] **OpenCV** : Mise à jour vers version compatible Python 3.12
-   - [ ] **Pillow (PIL)** : Vérification dernière version stable
-   - [ ] **SciPy** : Mise à jour et test des fonctions utilisées
-   - [ ] **Matplotlib** : Vérification compatibilité affichage
+- [x] Installation de Python 3.12
+- [x] Création d'un nouvel environnement virtuel
+- [x] Mise à jour de pip vers la dernière version
 
-.. todo::
-   **Dépendances de performance**
-   
-   - [ ] **Numba** : Mise à jour vers version compatible CUDA + Python 3.12
-   - [ ] **CuPy** : Vérification support GPU avec Python 3.12
-   - [ ] **PyTorch** : Mise à jour pour le modèle de réseau neuronal
-   - [ ] **scikit-image** : Test des fonctions de traitement d'image
+**Dépendances principales**
 
-.. todo::
-   **Dépendances utilitaires**
-   
-   - [ ] **exifread** : Lecture des métadonnées EXIF
-   - [ ] **colour-science** : Gestion des espaces colorimétriques
-   - [ ] **tqdm** : Barres de progression
-   - [ ] **psutil** : Monitoring système
+- [x] **Matplotlib** : Mise à jour vers version compatible Python 3.12
+- [x] **Sphinx** : Mise à jour vers version compatible Python 3.12
+- [x] **sphinx_rtd_theme** : Ajout d'un thème pour la génération de la documentation  
+  → *Commit* `a3c3a90` : ajout des bibliothèques de documentation
+- [x] **scikit-learn** : Correction du nom de package et mise à jour pour compatibilité  
+  → *Commit* `d387e0b` : renommage `sklearn` → `scikit-learn`
 
 Code source et compatibilité
------------------------------
+----------------------------
 
-.. todo::
-   **Syntaxe et fonctionnalités dépréciées**
-   
-   - [ ] Remplacement des ``collections.abc`` imports
-   - [ ] Mise à jour des annotations de type (PEP 585, 604)
-   - [ ] Vérification des ``f-strings`` et formatage
-   - [ ] Test des ``async/await`` si utilisés
-   - [ ] Validation des ``match/case`` statements (Python 3.10+)
+**Syntaxe et fonctionnalités dépréciées**
 
-.. todo::
-   **Modules hdrCore**
-   
-   - [ ] **processing.py** : Test des algorithmes de traitement HDR
-   - [ ] **aesthetics.py** : Vérification des métriques de qualité
-   - [ ] **quality.py** : Test des évaluations d'images
-   - [ ] **srgb.py** : Validation des conversions d'espaces colorimétriques
-   - [ ] **net.py** : Test du modèle de réseau neuronal
-   - [ ] **numbafun.py** : Recompilation et test des fonctions optimisées
+- [x] Passage de la valeur du slider d'un ``float`` à un string  
+  → *Commit* `f320c3a` : ajout d'une vérification sur le type de valeur du slider
 
-.. todo::
-   **Interface graphique (guiQt)**
-   
-   - [ ] **view.py** : Test de l'interface principale
-   - [ ] **controller.py** : Vérification de la logique de contrôle
-   - [ ] **model.py** : Test du modèle de données
-   - [ ] **thread.py** : Validation du multithreading
-   - [ ] Gestion des événements Qt
+**Interface graphique (guiQt)**
 
-.. todo::
-   **Gestion des préférences**
-   
-   - [ ] **preferences.py** : Test de sauvegarde/chargement JSON
-   - [ ] Validation des chemins de fichiers
-   - [ ] Compatibilité des paramètres existants
-
-Composants externes et interopérabilité
-----------------------------------------
-
-.. todo::
-   **DLL et binaires externes**
-   
-   - [ ] **HDRip.dll** : Vérification compatibilité Python 3.12
-   - [ ] **exiftool.exe** : Test d'intégration et de communication
-   - [ ] Interface ctypes et communication inter-processus
-
-.. todo::
-   **Modèles et données**
-   
-   - [ ] **MSESig505_0419.pth** : Test de chargement du modèle PyTorch
-   - [ ] Validation des formats de données
-   - [ ] Compatibilité des fichiers de configuration
+- [x] **view.py** : Test de l'interface principale  
+  → *Commit* `3c19765a` : vérification de l'existence de l’index dans `imagesControllers`
+- [x] **controller.py** : Vérification de la logique de contrôle  
+  → *Commits* `13cb308`, `acc2a8b` : sécurité sur `displayModel.get()` et `self.processPipes`
+- [x] **model.py** : Test du modèle de données  
+  → *Commit* `5443bf7` : contrôle de la validité de `selectedProcessPipe`
+- [x] **thread.py** : Validation du multithreading  
+  *(Aucun changement spécifique identifié)*
+- [x] Gestion des événements Qt  
+  → *Commit* `3e7a1a1` : correction du comportement de fermeture de la fenêtre d'export
 
 Tests et validation
 -------------------
 
-.. todo::
-   **Tests de fonctionnalité**
-   
-   - [ ] Import et chargement d'images HDR (.hdr, .exr, .tiff)
-   - [ ] Algorithmes de tone mapping
-   - [ ] Exportation vers différents formats
-   - [ ] Interface utilisateur et interactions
-   - [ ] Traitement par lots
+**Tests de fonctionnalité**
 
-.. todo::
-   **Tests de performance**
-   
-   - [ ] Benchmarking des modes de calcul (Python, Numba, CUDA, C++)
-   - [ ] Profiling mémoire et CPU
-   - [ ] Comparaison avec version Python 3.7
-   - [ ] Tests de charge sur gros volumes d'images
-
-.. todo::
-   **Tests de compatibilité**
-   
-   - [ ] Windows 10/11 (architecture x64)
-   - [ ] Différentes cartes graphiques NVIDIA
-   - [ ] Différentes résolutions d'écran
-   - [ ] Gestion des erreurs et exceptions
+- [ ] Import et chargement d'images HDR (.hdr)
+- [ ] Modification des paramètres des images HDR
+- [ ] Interface utilisateur et interactions
+- [ ] Tests de charge sur gros volumes d'images
 
 Documentation et déploiement
------------------------------
+----------------------------
 
-.. todo::
-   **Mise à jour documentation**
-   
-   - [ ] Prérequis système dans installation.rst
-   - [ ] Instructions d'installation Python 3.12
-   - [ ] Mise à jour des dépendances dans requirements.txt
-   - [ ] Guide de migration pour les utilisateurs
+**Mise à jour documentation**
 
-.. todo::
-   **Processus de build et distribution**
-   
-   - [ ] Scripts de packaging
-   - [ ] Création d'exécutables avec PyInstaller
-   - [ ] Tests de distribution
-   - [ ] Documentation utilisateur finale
-
-Problèmes connus et solutions
-=============================
-
-Problèmes identifiés
----------------------
-
-.. warning::
-   **Problèmes potentiels à surveiller :**
-   
-   - **PyQt5 vs PyQt6** : Changements d'API potentiels
-   - **Numba CUDA** : Vérifier compatibilité avec CUDA toolkit
-   - **Performance DLL** : Interface Python 3.12 ↔ C++
-   - **Dépendances binaires** : Disponibilité des wheels pour Python 3.12
-
-Solutions implémentées
-----------------------
-
-.. note::
-   **Documentation des solutions appliquées :**
-   
-   Cette section sera mise à jour au fur et à mesure de la résolution des problèmes
-   rencontrés durant la migration.
-
-Timeline de migration
-=====================
-
-Phases de déploiement
----------------------
-
-**Phase 1: Préparation (En cours)**
-   - Installation Python 3.12
-   - Audit des dépendances
-   - Tests de compatibilité de base
-
-**Phase 2: Migration du code**
-   - Mise à jour syntaxe et imports
-   - Test des modules principaux
-   - Résolution des incompatibilités
-
-**Phase 3: Tests et validation**
-   - Tests fonctionnels complets
-   - Benchmarking performance
-   - Validation interface utilisateur
-
-**Phase 4: Documentation et déploiement**
-   - Mise à jour documentation
-   - Guide de migration utilisateur
-   - Release finale
+- [x] Prérequis système dans installation.rst
+- [x] Instructions d'installation Python 3.12
+- [x] Mise à jour des dépendances dans requirements.txt
+- [x] Guide de migration pour les utilisateurs  
+  → *Commit* `7d2e7d1` : documentation complète (guide de migration, usage, optimisations)
+- [x] Documentation utilisateur finale  
+  → *Commits* `850f1c8`, `4d7fc3a` : ajouts initiaux de documentation
 
 Notes de version
 ================
@@ -230,20 +104,6 @@ Version actuelle: v6.0 (Python 3.12)
    Les notes de version détaillées seront ajoutées ici au fur et à mesure 
    des releases de la version Python 3.12.
 
-Retour d'expérience
-===================
-
-Enseignements tirés
--------------------
-
-.. note::
-   **Section à compléter avec :**
-   
-   - Difficultés rencontrées
-   - Solutions innovantes trouvées
-   - Recommandations pour futures migrations
-   - Impact sur les performances
-
 Ressources utiles
 =================
 
@@ -251,14 +111,3 @@ Liens de référence
 ------------------
 
 - `Python 3.12 Release Notes <https://docs.python.org/3.12/whatsnew/3.12.html>`_
-- `Porting to Python 3.12 <https://docs.python.org/3/howto/pyporting.html>`_
-- `PyQt6 Migration Guide <https://doc.qt.io/qtforpython/porting_from2.html>`_
-- `NumPy Compatibility Matrix <https://numpy.org/doc/stable/release.html>`_
-
-Outils de migration
--------------------
-
-- **2to3** : Outil automatique de conversion
-- **pyupgrade** : Modernisation de la syntaxe Python
-- **flake8** : Vérification de qualité du code
-- **mypy** : Vérification des types statiques

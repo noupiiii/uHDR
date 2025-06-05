@@ -117,24 +117,3 @@ L'application initialise séquentiellement :
 2. Initialisation de l'interface graphique
 3. Détection des écrans disponibles
 4. Chargement des modèles d'IA si nécessaire
-
-Dépannage
----------
-
-Problèmes courants
-~~~~~~~~~~~~~~~~~
-
-**Erreur : HDRip.dll introuvable**
-
-- Vérifiez que le fichier ``HDRip.dll`` est présent dans le répertoire racine
-- Sur certains systèmes, installez les redistributables Visual C++
-
-**Problèmes de performance**
-
-- Vérifiez le paramètre ``computation`` dans ``preferences/preferences.py``
-- Pour les GPU NVIDIA, installez CUDA Toolkit
-
-**Erreurs de métadonnées**
-
-- Vérifiez la présence d'``exiftool.exe``
-- Ajoutez le dossier contenant exiftool au PATH système

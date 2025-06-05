@@ -13,7 +13,7 @@
     <Name>uHDR</Name>
     <RootNamespace>HwHDR</RootNamespace>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
-    <InterpreterId>MSBuild|new|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>Global|VisualStudio|.venv</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +24,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="doc_uHDR\source\conf.py" />
     <Compile Include="guiQt\controller.py">
       <SubType>Code</SubType>
     </Compile>
@@ -74,28 +75,38 @@
     <Compile Include="uHDR.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="doc_uHDR\" />
+    <Folder Include="doc_uHDR\source\" />
+    <Folder Include="doc_uHDR\source\_static\" />
     <Folder Include="guiQt\" />
     <Folder Include="hdrCore\" />
     <Folder Include="preferences\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="doc_uHDR\make.bat" />
+    <Content Include="doc_uHDR\Makefile" />
+    <Content Include="doc_uHDR\source\api.rst" />
+    <Content Include="doc_uHDR\source\architecture.rst" />
+    <Content Include="doc_uHDR\source\contribution.rst" />
+    <Content Include="doc_uHDR\source\dependances.rst" />
+    <Content Include="doc_uHDR\source\index.rst" />
+    <Content Include="doc_uHDR\source\installation.rst" />
+    <Content Include="doc_uHDR\source\licence.rst" />
+    <Content Include="doc_uHDR\source\mises-a-jour.rst" />
+    <Content Include="doc_uHDR\source\optimisations.rst" />
+    <Content Include="doc_uHDR\source\presentation.rst" />
+    <Content Include="doc_uHDR\source\usage.rst" />
+    <Content Include="doc_uHDR\source\_static\custom.css" />
     <Content Include="preferences\prefs.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="preferences\tags.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="new\">
-      <Id>new</Id>
-      <Version>3.12</Version>
-      <Description>new (Python 3.12 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
+    <InterpreterReference Include="Global|VisualStudio|.venv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
